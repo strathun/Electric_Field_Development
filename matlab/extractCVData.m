@@ -42,6 +42,9 @@ for ii = 1:length(fnames)
     c = textread(currentNameStr,'%s','delimiter','\n');
     curveStartIndex = find(~cellfun(@isempty,strfind(c, sniffer )));
     OCVIndex = find(~cellfun(@isempty,strfind(c, sniffer2 )));
+    if isempty(OCVIndex)
+        OCVIndex = 0;
+    end
     curveStartIndex = curveStartIndex(curveStartIndex~=OCVIndex); % Removes this if there is a conditioning measurement
     fullTraces = length(curveStartIndex) - 1;   % Final curve is typically not a complete measurement, so we're ignoring it.
     
